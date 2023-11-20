@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, TouchableOpacity, TextInput,ScrollView,Text } from 'react-native';
+import { View, TouchableOpacity, TextInput, ScrollView, Text } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import styles from './styles';
 import { useNavigation } from "@react-navigation/native";

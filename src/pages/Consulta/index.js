@@ -16,7 +16,7 @@ const Consulta = () => {
     consultarBancoDeDados();
   }, [])
 
-  const consultarBancoDeDados = () => {
+  /*const consultarBancoDeDados = () => {
     const db = DatabaseConnection.getConnection();
     db.transaction((tx) => {
         tx.executeSql('SELECT * from colaboradores', [], (_, { rows }) => {
@@ -27,7 +27,7 @@ const Consulta = () => {
             setFuncionariosData(dadosFuncionarios)
         })
     })
-  }
+  }*/
 
   
 
@@ -41,7 +41,7 @@ const Consulta = () => {
       <Text style={styles.itemText}>EstadoCivil: {item.estadoCivil}</Text>
       <Text style={styles.itemText}>Sexo: {item.sexo}</Text>
       <Text style={styles.itemText}>Telefone: {item.telefone}</Text>
-      <Text style={styles.itemText}>Contato: {item.telefone}</Text>
+      <Text style={styles.itemText}>Contato: {item.contato}</Text>
       <Text style={styles.itemText}>Data de nascimento: {item.dataNascimento}</Text>
       <Text style={styles.itemText}>data de Admissao: {item.dataAdmissao}</Text>
       <Text style={styles.itemText}>Endereço: {item.endereco}</Text>
@@ -52,13 +52,76 @@ const Consulta = () => {
     </View>
   );
 
-  
-
+  //Parte para consultar o item
   const handleSearchPress = () => {
-    // Adicione a lógica de pesquisa aqui usando o valor em 'text'
-    console.log('Pesquisar:', text);
-    // Por exemplo, você pode filtrar os dados com base no texto e atualizar o estado da FlatList
+    const searchTerm = text.trim().toLowerCase();
+  
+    if (searchTerm === '') {
+      // Se o campo de pesquisa estiver vazio, exiba todos os colaboradores
+      consultarBancoDeDados();
+    } else {
+      const camposPesquisaveis = [
+        'nome', 'cargo', 'cpf', 'rg', 'naturalidade', 'estadoCivil',
+        'sexo', 'telefone', 'contato', 'dataNascimento', 'dataAdmissao',
+        'endereco', 'pis', 'serieCarteira'
+      ];
+  
+      const whereClause = camposPesquisaveis
+        .map((campo) => `LOWER(${campo}) LIKE '%${searchTerm}%'`)
+        .join(' OR ');
+  
+      const query = `SELECT * FROM colaboradores WHERE ${whereClause}`;
+  
+      consultarBancoDeDados(query);
+    }
   };
+  
+  const consultarBancoDeDados = (customQuery) => {
+    const db = DatabaseConnection.getConnection();
+  
+    db.transaction((tx) => {
+      const query = customQuery || 'SELECT * FROM colaboradores';
+  
+      tx.executeSql(query, [], (_, { rows }) => {
+        const dadosFuncionarios = [];
+  
+        for (let i = 0; i < rows.length; i++) {
+          dadosFuncionarios.push(rows.item(i));
+        }
+  
+        setFuncionariosData(dadosFuncionarios);
+      });
+    });
+  };
+
+//Parte para deletar o item
+  const handleDeleteItem = (id) => {
+                     // Exibe um alerta de confirmação antes de excluir
+    Alert.alert(
+      'Confirmação',
+      'Tem certeza de que deseja excluir este colaborador?',
+      [
+        {
+          text: 'Cancelar',
+          style: 'cancel',
+        },
+        {
+          text: 'Excluir',
+          onPress: () => confirmarExclusao(id),
+        },
+      ],
+      { cancelable: false }
+    );
+  };
+
+  const confirmarExclusao = (id) => {
+              // Implemente aqui a lógica para excluir o colaborador com o ID fornecido
+    console.log('Colaborador excluído com sucesso:', id);
+                 // Atualiza a lista após a exclusão
+    consultarBancoDeDados();
+  };
+
+
 
   return (
     <SafeAreaView style={styles.view}>
@@ -87,8 +150,9 @@ const Consulta = () => {
       <FlatList
         data={funcionariosData}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()} // Use toString() para garantir que a chave seja uma string
-        />
+        keyExtractor={(item) => item.id.toString()}
+        extraData={funcionariosData} 
+      />
     </Animatable.View>
     <Animatable.View animation="fadeInUp" delay={300} style={styles.lixeira}>
 
@@ -97,7 +161,7 @@ const Consulta = () => {
       size={60}
       color="#2D063B"
       style={styles.lixeiraIcon}
-      onPress={() => handleDeleteItem(item.id)}     
+     // onPress={() => handleDeleteItem(item.id)}     
        />
     <FontAwesome
       name="plus"
