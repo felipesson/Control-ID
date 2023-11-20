@@ -25,20 +25,7 @@ export default function Register() {
     //const [cadastroSucesso, setCadastroSucesso] = useState(false);
     const [dados, setDados] = useState([])
 
-    /*useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const response = await axios.get('http://locahost:3000/clientes');
-          const data = response.json()
-          setDados(data)
-          console.log(dados)
-        }catch(err){
-          console.log("Error")
-        }
-      }
-      ;
-      fetchData()
-    }, []); */
+
 
     useEffect(() => {
         const db = DatabaseConnection.getConnection();
@@ -58,7 +45,7 @@ export default function Register() {
     
 
     const handleRegister = () => {
-        /*if(cpf === "" ||nome === "" ||telefone === "" || senha === "" || confirmSenha === "") {
+        if(cpf === "" ||nome === "" ||telefone === "" || senha === "" || confirmSenha === "") {
             setErrorMessage("Os campos são obrigatórios");
             return;
         }
@@ -67,7 +54,7 @@ export default function Register() {
             return;
         }
 
-        setErrorMessage(null);*/
+        setErrorMessage(null);
         const db = DatabaseConnection.getConnection();
 
         db.transaction((tx) => {
@@ -94,7 +81,14 @@ export default function Register() {
 
     return(
         <View style={styles.container}>
-          
+            <View style={styles.voltar}>
+                <Ionicons style={styles.icone}
+                name="chevron-back"
+                size={40}
+                color="#2D063B"
+                onPress={() => {navigation.navigate("Login")}}
+            />
+            </View>
             <Animatable.View animation="fadeInLeft" delay={400} style={styles.containerBemvindo}>
                 <Text style={styles.title}> Cadastre-se! </Text>
             </Animatable.View>   

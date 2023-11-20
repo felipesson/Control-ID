@@ -5,6 +5,18 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor:  "#FCFAD4", 
     },
+    icone:{
+        color:'#2D063B',
+        marginTop: '10%',  // Ajuste de margem
+      },
+      voltar:{
+       // flexDirection: 'row',
+        marginTop:'3%',
+        position: 'absolute',  // Posicionamento absoluto
+        left: 0,
+        right: 0,
+        zIndex: 1,
+      },
     containerBemvindo: {
         
         marginTop:'30%',
