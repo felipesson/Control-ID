@@ -5,6 +5,7 @@ import Register from "../pages/Register";
 import Dashboard from '../pages/Dashboard';
 import RegistrarColab from '../pages/RegistrarColab';
 import Consulta from '../pages/Consulta';
+import Delete from '../pages/Delete'
 
 const Stack = createNativeStackNavigator();
 
@@ -44,6 +45,11 @@ export default function Routes(){
             <Stack.Screen
             name="Consulta" 
             component={Consulta}
+            options={{ headerShown: false}}
+            />
+             <Stack.Screen
+            name="Delete" 
+            component={Delete}
             options={{ headerShown: false}}
             />
 

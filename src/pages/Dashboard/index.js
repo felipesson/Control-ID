@@ -36,7 +36,11 @@ const Dashboard = () => {
                                 <Text style={styles.textCard}>Cadastrar colaboradores</Text>
                             </TouchableOpacity>
                         </View>
-                        
+                        <View style={styles.card2}>
+                            <TouchableOpacity style={styles.buttonRegister} onPress={() => navigation.navigate('Delete')}>
+                                <Text style={styles.textCard}>Deletar colaboradores</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
             </Animatable.View>
