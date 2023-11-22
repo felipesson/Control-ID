@@ -27,20 +27,33 @@ const Dashboard = () => {
                     <Text style={styles.heading}>Dashboard</Text>
                     <View style={styles.containerCards}>
                         <View style={styles.card}>
-                            <TouchableOpacity style={styles.buttonRegister} onPress={() => navigation.navigate('Consulta')}>
-                                <Text style={styles.textCard}>Consultar colaboradores</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={styles.card1}>
-                            <TouchableOpacity style={styles.buttonRegister} onPress={() => navigation.navigate('RegistrarColab')}>
-                                <Text style={styles.textCard}>Cadastrar colaboradores</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={styles.card2}>
-                            <TouchableOpacity style={styles.buttonRegister} onPress={() => navigation.navigate('Delete')}>
-                                <Text style={styles.textCard}>Deletar colaboradores</Text>
-                            </TouchableOpacity>
-                        </View>
+                                <TouchableOpacity
+                                    style={styles.buttonRegister}
+                                    onPress={() => navigation.navigate('Consulta')}
+                                    activeOpacity={0.7} // Define a opacidade durante o pressionamento
+                                >
+                                    <Text style={styles.textCard}>Consultar colaboradores</Text>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={styles.card1}>
+                                <TouchableOpacity
+                                    style={styles.buttonRegister}
+                                    onPress={() => navigation.navigate('RegistrarColab')}
+                                    activeOpacity={0.7} // Define a opacidade durante o pressionamento
+                                >
+                                    <Text style={styles.textCard}>Cadastrar colaboradores</Text>
+                                </TouchableOpacity>
+                            </View>
+
+                            <View style={styles.card2}>
+                                <TouchableOpacity
+                                    style={styles.buttonRegister}
+                                    onPress={() => navigation.navigate('Delete')}
+                                    activeOpacity={0.7} // Define a opacidade durante o pressionamento
+                                >
+                                    <Text style={styles.textCard}>Deletar colaboradores</Text>
+                                </TouchableOpacity>
+                            </View>
                     </View>
                 </View>
             </Animatable.View>

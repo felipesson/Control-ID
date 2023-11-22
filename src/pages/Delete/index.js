@@ -72,12 +72,14 @@ const ExcluirColaborador = () => {
 
       
       <Animatable.View animation="fadeInDown" delay={300} style={styles.pesquisar}>
-        <Ionicons
-          name="chevron-back"
-          size={50}
-          color="#2D063B"
-          onPress={() => navigation.goBack()}
-        />
+      <Ionicons
+        name="chevron-back"
+        size={50}
+        color="#2D063B"
+        onPress={() => navigation.goBack()}
+        style={{ opacity: 1 }} // Defina a opacidade inicial
+        activeOpacity={0.5}   // Define a opacidade durante o pressionamento
+      />
         <TextInput
           style={styles.input}
           placeholder="ID do Colaborador"

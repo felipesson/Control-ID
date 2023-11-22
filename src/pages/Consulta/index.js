@@ -45,7 +45,6 @@ const Consulta = () => {
     const query = `SELECT * FROM colaboradores WHERE ${whereClause}`;
     consultarBancoDeDados(query);
   };
-  
 
   const consultarBancoDeDados = (customQuery) => {
     const db = DatabaseConnection.getConnection();

@@ -26,28 +26,22 @@ export default function RegistrarColab() {
   const [id, setId] = useState('');
   
   const navigation = useNavigation();
-  
+
   useEffect(() => {
     const db = DatabaseConnection.getConnection();
-    db.transaction(
-      (tx) => {
-        tx.executeSql(
-          'CREATE TABLE IF NOT EXISTS colaboradores (id INTEGER PRIMARY KEY AUTOINCREMENT, cpf TEXT UNIQUE, nome TEXT NOT NULL, cargo TEXT, rg TEXT, naturalidade TEXT, estadoCivil TEXT, sexo TEXT, telefone TEXT, contato TEXT, dataNascimento TEXT, dataAdmissao TEXT, endereco TEXT, pis TEXT, serieCarteira TEXT)',
-          [],
-          () => {
-            console.log('Tabela "colaboradores" criada com sucesso.');
-          },
-          (error) => {
-            console.error('Erro ao criar a tabela "colaboradores":', error);
-          }
-        );
-      },
-      (error) => {
-        console.error('Erro na transação:', error);
-      }
-    );
+    db.transaction((tx) => {
+      tx.executeSql(
+        'CREATE TABLE IF NOT EXISTS colaboradores (id PRIMARY KEY AUTOINCREMENT, cpf TEXT UNIQUE, nome TEXT NOT NULL, cargo TEXT, rg TEXT, naturalidade TEXT, estadoCivil TEXT, sexo TEXT, telefone TEXT, contato TEXT, dataNascimento TEXT, dataAdmissao TEXT, endereco TEXT, pis TEXT, serieCarteira TEXT)',
+        [],
+        () => {
+          console.log('Tabela "colaboradores" criada com sucesso.');
+        },
+        (error) => {
+          console.error('Erro ao criar a tabela "colaboradores":', error);
+        }
+      );
+    });
   }, []);
-  
   
 
 
